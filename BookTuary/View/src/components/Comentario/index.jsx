@@ -7,7 +7,7 @@ function CommentSection() {
     "Comentário 1: Esse é um exemplo de comentário.",
     "Comentário 2: Esse é um exemplo de comentário.",
     "Comentário 3: Esse é um exemplo de comentário.",
-    "socorro00",
+    "..",
     // Adicione mais comentários conforme necessário
   ];
 
