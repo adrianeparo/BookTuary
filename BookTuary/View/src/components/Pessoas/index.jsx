@@ -1,24 +1,25 @@
 import React from "react";
 import Usuariophoto from "../../assets/user01.svg";
 import Usuariophoto2 from "../../assets/user02.svg";
+import { Titulo, Conteudo, Itens, Botao, Name, Nick } from "./style";
 
 function Pessoas() {
   return (
-    <div>
-      <h1>Pessoas que talvez você conheça</h1>
-      <div>
+    <Conteudo>
+      <Titulo>Pessoas que talvez você conheça</Titulo>
+      <Itens>
         <div>
           <img src={Usuariophoto2} alt="User" />
         </div>
         <div>
-          <p>Leo</p>
-          <p>@leo3o</p>
+          <Name>Leo</Name>
+          <Nick>@leo3o</Nick>
         </div>
         <div>
-          <button>Seguir</button>
+          <Botao>Seguir</Botao>
         </div>
-      </div>
-    </div>
+      </Itens>
+    </Conteudo>
   );
 }
 
