@@ -84,20 +84,22 @@ const Input = () => {
 };
 
 const StyledWrapper = styled.div`
-  .searchBox {
-    display: flex;
-    max-width: 600px;
-    height: 60px;
-    align-items: center;
-    justify-content: space-between;
-    background: #16161a;
-    border-radius: 50px;
-    position: relative;
+ .searchBox {
+  display: flex;
+  width: 680px; /* Ajuste o valor para a largura desejada */
+  max-width: 100%; /* Permite que o componente se ajuste à tela */
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  background: #16161a;
+  border-radius: 50px;
+  position: relative;
 
-    @media (max-width: 1200px) {
-      width: 400px !important;
-      height: 55px;
-    }
+  @media (max-width: 1200px) {
+    width: 100%; /* Faz com que o componente ocupe a largura máxima em telas menores */
+    height: 55px;
+  }
+
   }
 
   .searchButton {
@@ -137,23 +139,21 @@ const StyledWrapper = styled.div`
   }
 
   .searchInput {
-    @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  padding: 24px 46px 24px 30px;
+  transition: all 0.2s ease-in-out;
+  width: 680px; /* Subtrai o espaço ocupado pelo botão */
+  height: 100%; /* Ajusta a altura para ocupar todo o contêiner */
 
-    border: none;
-    background: none;
-    outline: none;
-    color: white;
-    font-size: 16px;
-    font-family: "Inter", sans-serif;
-    padding: 24px 46px 24px 30px;
-    transition: all 0.2s ease-in-out;
-    height: 70px;
-    width: 640px; /* Define um tamanho máximo de largura */
-
-    @media (max-width: 1200px) {
-      font-size: 12px !important;
-    }
+  @media (max-width: 1200px) {
+    font-size: 12px;
   }
+}
 
   /* Efeito quando o input recebe o foco */
   .searchInput:focus {

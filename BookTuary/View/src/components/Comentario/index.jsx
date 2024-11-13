@@ -1,21 +1,21 @@
-// CommentSection.js
 import React from "react";
-import { CommentsContainer, Comment, Conteudo } from "./style";
+import { CommentsContainer, Conteudo, PlaceholderImage } from "./style";
+import CommentPlaceholder1 from "../../assets/comment-placeholder1.svg";
+import CommentPlaceholder2 from "../../assets/comment-placeholder2.svg";
 
 function CommentSection() {
   const comments = [
-    "Comentário 1: Esse é um exemplo de comentário.",
-    "Comentário 2: Esse é um exemplo de comentário.",
-    "Comentário 3: Esse é um exemplo de comentário.",
-    "socorro00",
-    // Adicione mais comentários conforme necessário
+    CommentPlaceholder1,
+    CommentPlaceholder2,
+    CommentPlaceholder1,
+    // Adicione mais imagens conforme necessário
   ];
 
   return (
     <Conteudo>
       <CommentsContainer>
-        {comments.map((comment, index) => (
-          <Comment key={index}>{comment}</Comment>
+        {comments.map((image, index) => (
+          <PlaceholderImage key={index} src={image} alt={`Comentário Ilustrativo ${index + 1}`} />
         ))}
       </CommentsContainer>
     </Conteudo>
@@ -23,3 +23,4 @@ function CommentSection() {
 }
 
 export default CommentSection;
+

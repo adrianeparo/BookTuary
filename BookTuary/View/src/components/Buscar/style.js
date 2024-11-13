@@ -14,7 +14,7 @@ export const Conteudo = styled.div`
 
 export const Busca = styled.h1`
   input {
-    width: 690px;
+    width: 900px;
     height: 60px;
     flex-shrink: 0;
     background: #d6c9c9;

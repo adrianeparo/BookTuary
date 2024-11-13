@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const CommentsContainer = styled.div`
-  width: 820px;
+  width: 900px;
   height: 800px;
   overflow-y: auto;
   padding: 10px;
@@ -45,4 +45,11 @@ export const Conteudo = styled.div`
   flex-direction: column;
   margin-left: 45px;
   margin-top: 3px;
+`;
+
+export const PlaceholderImage = styled.img`
+  width: 100%;
+  max-width: 1000px; /* Ajuste conforme o layout */
+  height: auto;
+  margin: 10px 0;
 `;
