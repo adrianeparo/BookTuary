@@ -1,7 +1,9 @@
+import Pessoas from "../../components/Pessoas"
+
 function Perfil(){
     return(
         <div>
-            <h1>Perfil</h1>
+            <Pessoas />
         </div>
     )
 
