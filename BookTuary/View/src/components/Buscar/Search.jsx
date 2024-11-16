@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+// Se estiver usando um JSON local:
+import books from "./books.json";
 
 const Input = () => {
+  const [searchTerm, setSearchTerm] = useState(""); // Termo de busca
+  const [filteredBooks, setFilteredBooks] = useState([]); // Livros filtrados
+
+  useEffect(() => {
+    // Filtrar os livros com base no termo de busca
+    if (searchTerm.trim() === "") {
+      setFilteredBooks([]); // Limpa os resultados se não houver termo
+    } else {
+      const filtered = books.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredBooks(filtered);
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    fetch("/books.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data);
+      });
+  }, []);
+  
+
   return (
     <StyledWrapper>
       <div className="searchBox">
         <input
           className="searchInput"
           type="text"
-          name
           placeholder="Buscar por livros"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o termo de busca
         />
         <button className="searchButton" href="#">
+          {/* Botão com ícone */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={23}
@@ -32,41 +60,6 @@ const Input = () => {
               </g>
             </g>
             <defs>
-              <filter
-                id="filter0_d_2_17"
-                x="-0.418549"
-                y="3.70435"
-                width="29.7139"
-                height="29.7139"
-                filterUnits="userSpaceOnUse"
-                colorInterpolationFilters="sRGB"
-              >
-                <feFlood floodOpacity={0} result="BackgroundImageFix" />
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                />
-                <feOffset dy={4} />
-                <feGaussianBlur stdDeviation={2} />
-                <feComposite in2="hardAlpha" operator="out" />
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                />
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_2_17"
-                />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_2_17"
-                  result="shape"
-                />
-              </filter>
               <clipPath id="clip0_2_17">
                 <rect
                   width="28.0702"
@@ -79,27 +72,42 @@ const Input = () => {
           </svg>
         </button>
       </div>
+      <ul>
+        {/* Exibir os resultados filtrados */}
+        {filteredBooks.map((book) => (
+          <li key={book.id}>
+            <a href={book.url} target="_blank" rel="noopener noreferrer">
+              <img
+                src={book.image}
+                alt={`Capa do livro ${book.title}`}
+                style={{ width: "100px", height: "150px" }}
+              />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
- .searchBox {
-  display: flex;
-  width: 680px; /* Ajuste o valor para a largura desejada */
-  max-width: 100%; /* Permite que o componente se ajuste à tela */
-  height: 60px;
-  align-items: center;
-  justify-content: space-between;
-  background: #16161a;
-  border-radius: 50px;
-  position: relative;
+  .searchBox {
+    display: flex;
+    width: 680px; /* Ajuste o valor para a largura desejada */
+    max-width: 100%; /* Permite que o componente se ajuste à tela */
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    background: #16161a;
+    border-radius: 50px;
+    position: relative;
 
-  @media (max-width: 1200px) {
-    width: 100%; /* Faz com que o componente ocupe a largura máxima em telas menores */
-    height: 55px;
-  }
-
+    @media (max-width: 1200px) {
+      width: 100%; /* Faz com que o componente ocupe a largura máxima em telas menores */
+      height: 55px;
+    }
   }
 
   .searchButton {
@@ -139,21 +147,21 @@ const StyledWrapper = styled.div`
   }
 
   .searchInput {
-  border: none;
-  background: none;
-  outline: none;
-  color: white;
-  font-size: 16px;
-  font-family: "Inter", sans-serif;
-  padding: 24px 46px 24px 30px;
-  transition: all 0.2s ease-in-out;
-  width: 680px; /* Subtrai o espaço ocupado pelo botão */
-  height: 100%; /* Ajusta a altura para ocupar todo o contêiner */
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    padding: 24px 46px 24px 30px;
+    transition: all 0.2s ease-in-out;
+    width: 680px; /* Subtrai o espaço ocupado pelo botão */
+    height: 100%; /* Ajusta a altura para ocupar todo o contêiner */
 
-  @media (max-width: 1200px) {
-    font-size: 12px;
+    @media (max-width: 1200px) {
+      font-size: 12px;
+    }
   }
-}
 
   /* Efeito quando o input recebe o foco */
   .searchInput:focus {
