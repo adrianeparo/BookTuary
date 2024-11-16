@@ -1,9 +1,11 @@
 import Buscar from "../../components/Buscar";
 import Sidebar from "../../components/Sidebar";
 import React, { useEffect } from "react";
-import { Conteudo } from "./style";
+import { Conteudo, Seguir } from "./style";
 import Rating from "../../components/Rating";
 import CommentSection from "../../components/Comentario";
+import Pessoas from "../../components/Pessoas";
+import Lqtvg from "../../components/Livroqtvg";
 
 function Home() {
   useEffect(() => {
@@ -18,6 +20,10 @@ function Home() {
           <Buscar />
           <CommentSection />
         </div>
+
+          <Seguir>
+            <Lqtvg />
+          </Seguir>
       </Conteudo>
     </>
   );

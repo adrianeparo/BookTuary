@@ -1,0 +1,6 @@
+[
+    { "id": 1, "title": "Dracula", "author": "Bram Stoker", "url": "/dracula" },
+    { "id": 2, "title": "Frankenstein", "author": "Mary Shelley", "url": "/frankenstein" },
+    { "id": 3, "title": "O Nome do Vento", "author": "Patrick Rothfuss", "url": "/nome-do-vento" }
+  ]
+  

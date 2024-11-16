@@ -1,9 +1,9 @@
+import Lqtvg from "../../components/Livroqtvg"
 import Pessoas from "../../components/Pessoas"
 
 function Perfil(){
     return(
         <div>
-            <Pessoas />
         </div>
     )
 
