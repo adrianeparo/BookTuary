@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const CommentsContainer = styled.div`
-  width: 900px;
+  width: 915px;
   height: 800px;
   overflow-y: auto;
   padding: 10px;

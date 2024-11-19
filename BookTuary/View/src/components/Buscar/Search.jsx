@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-// Se estiver usando um JSON local:
-import books from "./books.json";
+import books from "./books.json"; 
 
 const Input = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // Termo de busca
-  const [filteredBooks, setFilteredBooks] = useState([]); // Livros filtrados
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const searchBoxRef = useRef(null); 
 
   useEffect(() => {
-    // Filtrar os livros com base no termo de busca
     if (searchTerm.trim() === "") {
-      setFilteredBooks([]); // Limpa os resultados se não houver termo
+      setFilteredBooks([]);
     } else {
       const filtered = books.filter((book) =>
         book.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -19,75 +18,68 @@ const Input = () => {
     }
   }, [searchTerm]);
 
+  // Função para fechar a barra de pesquisa ao clicar fora
   useEffect(() => {
-    fetch("/books.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setBooks(data);
-      });
+    const handleClickOutside = (event) => {
+      if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
+        setSearchTerm(""); // Limpa o termo de pesquisa quando clicar fora
+      }
+    };
+
+    // Adiciona o evento de clique
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Limpeza do evento
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
-  
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // Mostra todos os livros ao pressionar Enter
+      setFilteredBooks(books);
+    }
+  };
 
   return (
-    <StyledWrapper>
-      <div className="searchBox">
+    <StyledWrapper filteredBooks={filteredBooks}>
+      <div className="searchBox" ref={searchBoxRef}>
         <input
           className="searchInput"
           type="text"
           placeholder="Buscar por livros"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o termo de busca
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown} // Adiciona o evento para capturar a tecla pressionada
         />
-        <button className="searchButton" href="#">
-          {/* Botão com ícone */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={23}
-            height={23}
-            viewBox="0 0 29 29"
-            fill="none"
-          >
-            <g clipPath="url(#clip0_2_17)">
-              <g filter="url(#filter0_d_2_17)">
-                <path
-                  d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z"
-                  stroke="white"
-                  strokeWidth={3}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  shapeRendering="crispEdges"
-                />
-              </g>
-            </g>
-            <defs>
-              <clipPath id="clip0_2_17">
-                <rect
-                  width="28.0702"
-                  height="28.0702"
-                  fill="white"
-                  transform="translate(0.403503 0.526367)"
-                />
-              </clipPath>
-            </defs>
-          </svg>
-        </button>
       </div>
-      <ul>
-        {/* Exibir os resultados filtrados */}
-        {filteredBooks.map((book) => (
-          <li key={book.id}>
-            <a href={book.url} target="_blank" rel="noopener noreferrer">
-              <img
-                src={book.image}
-                alt={`Capa do livro ${book.title}`}
-                style={{ width: "100px", height: "150px" }}
-              />
-              <h3>{book.title}</h3>
-              <p>{book.author}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div className="pesquisa">
+        {filteredBooks.length > 0 && (
+          <ul>
+            {filteredBooks.map((book) => (
+              <li key={book.id}>
+                <a href={book.url} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={book.image}
+                    alt={`Capa do livro ${book.title}`}
+                    style={{ width: "90px", height: "140px" }}
+                  />
+                  <div>
+                    <h1>{book.title}</h1>
+                    <h2>{book.author}</h2>
+                    <br />
+                    <p>{book.paginas} páginas</p>
+                    <p>Idioma: {book.idioma}</p>
+                    <br />
+                    <p>{book.year}</p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </StyledWrapper>
   );
 };
@@ -95,8 +87,8 @@ const Input = () => {
 const StyledWrapper = styled.div`
   .searchBox {
     display: flex;
-    width: 680px; /* Ajuste o valor para a largura desejada */
-    max-width: 100%; /* Permite que o componente se ajuste à tela */
+    width: 690px; 
+    max-width: 100%;
     height: 60px;
     align-items: center;
     justify-content: space-between;
@@ -105,8 +97,102 @@ const StyledWrapper = styled.div`
     position: relative;
 
     @media (max-width: 1200px) {
-      width: 100%; /* Faz com que o componente ocupe a largura máxima em telas menores */
+      width: 100%;
       height: 55px;
+    }
+  }
+
+  .pesquisa {
+    flex-direction: column;
+  }
+
+  ul {
+    flex-direction: column;
+    position: absolute;
+    top: 120px;
+    width: 680px;
+    height: 360px;
+    background: #1f1f1f;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    z-index: 1;
+    overflow-y: auto;
+    max-height: 500px;
+
+
+    scrollbar-width: thin; 
+    scrollbar-color: transparent transparent; 
+  }
+
+  ul::-webkit-scrollbar {
+    width: 8px; 
+  }
+
+  ul::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ul::-webkit-scrollbar-thumb {
+    background: transparent; 
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px;
+    row-gap: 20px;
+    border-bottom: 1px solid #333;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #292929;
+      border-radius: 15px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      width: 100%;
+    }
+
+    img {
+      width: 80px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 17px;
+      margin: 0;
+      color: #aaa;
+    }
+
+    p {
+      font-size: 15px;
+      margin: 0;
+      color: #aaa;
     }
   }
 
@@ -128,7 +214,6 @@ const StyledWrapper = styled.div`
     }
   }
 
-  /*hover effect*/
   button:hover {
     color: #fff;
     background-color: #1a1a1a;
@@ -140,7 +225,6 @@ const StyledWrapper = styled.div`
     );
   }
 
-  /*button pressing effect*/
   button:active {
     box-shadow: none;
     transform: translateY(0);
@@ -155,21 +239,21 @@ const StyledWrapper = styled.div`
     font-family: "Inter", sans-serif;
     padding: 24px 46px 24px 30px;
     transition: all 0.2s ease-in-out;
-    width: 680px; /* Subtrai o espaço ocupado pelo botão */
-    height: 100%; /* Ajusta a altura para ocupar todo o contêiner */
+    width: 690px; 
+    height: 100%;
 
     @media (max-width: 1200px) {
       font-size: 12px;
     }
   }
 
-  /* Efeito quando o input recebe o foco */
+
   .searchInput:focus {
-    border: 2px solid #404588; /* Adiciona uma borda ao redor do input */
+    border: 2px solid #404588; 
     border-radius: 30px;
-    background-color: #2c2c2f; /* Altera a cor de fundo */
-    box-shadow: 0 0 5px rgba(64, 69, 136, 0.8); /* Adiciona uma sombra ao redor */
-    color: #fff; /* A cor do texto quando o input está em foco */
+    background-color: #2c2c2f;
+    box-shadow: 0 0 5px rgba(64, 69, 136, 0.8);
+    color: #fff; 
   }
 `;
 

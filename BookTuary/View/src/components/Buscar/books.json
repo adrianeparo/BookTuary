@@ -3,28 +3,44 @@
     "id": 1,
     "title": "Drácula",
     "author": "Bram Stoker",
-    "image": "https://via.placeholder.com/100x150?text=Drácula",
+    "year": 2014,
+    "idioma": "Português",
+    "paginas": 648,
+    "editora": "Penguin-Companhia",
+    "image": "https://m.media-amazon.com/images/I/51IK5qhKJFS._SY445_SX342_.jpg",
     "url": "/dracula"
   },
   {
     "id": 2,
     "title": "Frankenstein",
     "author": "Mary Shelley",
-    "image": "https://via.placeholder.com/100x150?text=Frankenstein",
+    "year": 2015,
+    "idioma": "Português",
+    "paginas": 424,
+    "editora": "Penguin-Companhia",
+    "image": "https://m.media-amazon.com/images/I/41AtsOnpfML._SY445_SX342_.jpg",
     "url": "/frankenstein"
   },
   {
     "id": 3,
     "title": "O Sol é Para Todos",
     "author": "Harper Lee",
-    "image": "https://via.placeholder.com/100x150?text=O+Sol+é+Para+Todos",
+    "year": 2006,
+    "idioma": "Português",
+    "paginas": 349,
+    "editora": "José Olympio",
+    "image": "https://m.media-amazon.com/images/I/91WKPd60P4L._SY466_.jpg",
     "url": "/o-sol-e-para-todos"
   },
   {
     "id": 4,
     "title": "A Metamorfose",
     "author": "Franz Kafka",
-    "image": "https://via.placeholder.com/100x150?text=A+Metamorfose",
+    "year": 1997,
+    "idioma": "Português",
+    "paginas": 96,
+    "editora": "Companhia das Letras",
+    "image": "https://m.media-amazon.com/images/I/71QLwli7GUL._SY466_.jpg",
     "url": "/metamorfose"
   }
 ]
