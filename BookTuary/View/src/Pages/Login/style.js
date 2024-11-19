@@ -17,7 +17,7 @@ export const Imagem = styled.div`
   display: flex; /* Usa o layout flexbox */
   justify-content: center; /* Centraliza o conteúdo horizontalmente */
   align-items: center; /* Centraliza o conteúdo verticalmente */
-  width: 40vw; /* Define a largura como 50% da largura da viewport */
+  width: 43vw; /* Define a largura como 50% da largura da viewport */
   height: 100vh; /* Define a altura como 100% da altura da viewport */
   position: absolute; /* Posiciona o elemento em relação à sua posição ancestral */
   left: 0; /* Posiciona o elemento na extremidade direita da tela */
@@ -75,6 +75,7 @@ export const InputUm = styled.div`
   text-align: left;
   font-size: 14px;
   width: 100%;
+  margin-right: 50px;
 
   p{
     display: flex;
@@ -84,7 +85,7 @@ export const InputUm = styled.div`
   }
 
   input {
-    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    width: 400px; /* Faz o input ocupar toda a largura disponível */
     padding: 10px 0; /* Adiciona um pouco de espaçamento interno vertical */
     border: none; /* Remove todas as bordas */
     border-bottom: 2px solid #6F79FF; /* Adiciona apenas uma borda inferior */
@@ -109,6 +110,7 @@ export const InputDois = styled.div`
   text-align: left;
   font-size: 14px;
   width: 100%;
+  margin-right: 50px;
 
   p{
     display: flex;
@@ -119,7 +121,7 @@ export const InputDois = styled.div`
   }
 
   input {
-    width: 100%; 
+    width: 400px; 
     padding: 10px 0 5px 0;
     border: none; 
     border-bottom: 2px solid #6F79FF;
@@ -180,12 +182,13 @@ export const Entrar = styled(Link)`
 
 export const Esqueceu = styled(Link)`
    display: flex;
-   padding-left: 32vh;
+   margin-left: 250px;
    font-family: "Asul", serif;
    margin-top: -10px;
    font-size: 12px;
    text-decoration: none;
    color: #909090;
+   width: 500px;
     
   &:hover {
     color: white;
@@ -200,7 +203,7 @@ export const BotaoDois = styled(Link)`
    font-family: "Asul", serif;
    margin-top: 10px;
    font-size: 13px;
-   margin-left: -5px;
+   margin-left: -6px;
    color: #909090;
   
   &:hover {
