@@ -5,6 +5,7 @@ import Cadastro from '../Pages/Cadastro';
 import Login from '../Pages/Login';
 import Home from '../Pages/Home';
 import Perfil from '../Pages/Perfil';
+import DraculaLivro from '../Pages/Livros/Dracula';
 
 function AppRoutes (){
     return(    
@@ -14,6 +15,7 @@ function AppRoutes (){
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path='/dracula' element={<DraculaLivro />} />
         </Routes>
     )
 }

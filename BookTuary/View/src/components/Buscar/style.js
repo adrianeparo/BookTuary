@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { MagnifyingGlass } from "phosphor-react";
+import { Link } from "react-router-dom";
 
 export const Conteudo = styled.div`
   display: flex;
@@ -47,12 +48,13 @@ export const Busca = styled.h1`
 
 
 
-export const Logo = styled.h1`
+export const Logo = styled(Link)`
   color: #d6c9c9;
   text-shadow: 0px 0px 17.052px #d6c9c9, 0px 0px 4.872px #d6c9c9;
   font-family: Milonga;
   padding: 10px;
   margin-top: 2px;
+  text-decoration: none;
 
   font-size: 25px;
   font-style: normal;
