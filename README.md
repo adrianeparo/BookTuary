@@ -14,7 +14,7 @@
 </table>
 
 <h2>🔄 Status do Projeto</h2>
-<p>Atualmente, o BookTuary está em fase de desenvolvimento. O foco inicial é construir uma interface de usuário intuitiva e responsiva, que facilite o cadastro de novos usuários e o acesso a um catálogo diversificado de obras literárias. </p>
+<p> Atualmente, o BookTuary conta com um protótipo funcional, disponível aqui no GitHub. O foco deste protótipo é apresentar uma interface de usuário intuitiva e responsiva, que simula o cadastro de novos usuários e o acesso a um catálogo diversificado de obras literárias. Este é o primeiro passo no desenvolvimento da plataforma completa. :)</p>
 <br>
 <div align="center">
 <h2>💻 Tecnologias Utilizadas</h2>
